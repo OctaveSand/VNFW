@@ -1,0 +1,10 @@
+label .water_will_have_to_wait:
+  l "Cool. Have fun dying of thirst asshole."
+  "She turns to leave. Addressing you from over her shoulder as she walks away."
+  l "I'll be back around before you die... probably."
+  l "If you're still alive when I come back, you can show me you're ready for water by dropping to your knees and silently waiting for my command."
+  l "You won't be given another chance."
+  hide lilly
+  $enable_interaction('beg_lilly_for_water')
+  $GAME.end_turn()
+  $GAME.home()

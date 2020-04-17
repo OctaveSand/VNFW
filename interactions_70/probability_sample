@@ -1,0 +1,13 @@
+init 70 python:
+  #An example of an interaction that always fires on bed-clicks but only does something 25% of the time
+  class NightSweats(Interaction):
+    def is_runnable(self):
+      if(self.v['enabled']):
+        if(GAME.turn >= 3):
+          if(renpy.random.randint(1, 100) <= self.v['probability']):
+            return True
+      return False
+
+  NightSweats('night_sweats', 'cell_bed', { 'enabled':True,
+                                                'probability':25 })
+                                                # 25 percent probability

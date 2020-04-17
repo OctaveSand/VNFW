@@ -1,0 +1,13 @@
+# Image maps like this one are how we map player interaction decisions back to entities
+# and the interaction objects that may or may not be stored within them
+# Note that every clickable area of the screen calls back to a single 'interact' label
+# which in turn calls that entities .interact() method.
+
+screen cell:
+     imagemap:
+        auto "cell_%s.png"
+        hotspot (259, 417, 561, 174) action Call("interact","cell_bed") 
+        hotspot (55, 136, 152, 240) action Call("interact","cell_tv")
+        hotspot (3, 456, 183, 262) action Call("interact","cell_toilet")
+        hotspot (316, 223, 167, 93) action Call("interact","cell_shelf")
+        hotspot (970, 149, 279, 478) action Call("interact","cell_door")

@@ -1,0 +1,22 @@
+init 70 python:
+  class MeetLilly(Event):
+    #This class is an example of a scheduled meeting with an NPC
+    #It will fire automatically as long as the game-time equals "Morning"
+    #It will steal control from the player and jumping straight to the label "meet_lilly"
+
+    def is_runnable(self):
+      if GAME.time == "Morning":
+        return True
+      return False
+      
+
+    def run(self):
+      renpy.jump("meet_lilly")
+      
+
+  # Above we defined the meetlilly event and its runnable and run methods,
+  # now we instantiate it, which schedules it in the game-objects event queue. 
+  # Note that we're registering it as a julian-based event with "jday". 
+  # Therefore this event will fire on day-2 in the "Morning"
+
+  MeetLilly('meet_lilly',"jday",days=[2]).schedule(GAME)

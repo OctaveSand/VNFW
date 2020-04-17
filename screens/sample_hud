@@ -1,0 +1,9 @@
+# An example of a simple HUD showing the game time along the top left of the screen
+
+screen hud:
+    zorder 100
+    fixed:
+      hbox:
+        spacing 20
+        text "[GAME.today], week: [GAME.week]"
+        text "Time: [GAME.time]"

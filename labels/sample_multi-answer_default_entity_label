@@ -1,0 +1,23 @@
+# Default entity labels can get boring, here's an example of a home label for a bed entity 
+# that returns a randomly chosen default message
+
+label cell_bed:
+  $msg = [ 'You waste time, staring at the ceiling for a while',
+        "Time passes",
+        "You wish you could learn to meditate",
+        "You sigh in bordom for 3 straight hours",
+        "Was that a sound? Did you really hear it or was it your imagination?",
+        "Suddenly nothing happens (for 3 hours)",
+        "You try to sleep and fail miserably",
+        "You twiddle your thumbs"
+        ]
+
+  if GAME.turn < 3:
+    scene bg_ceiling
+    $m = renpy.random.choice(msg)
+    "[m]"
+    $GAME.end_turn()
+  else:
+    scene black
+    "You fall asleep"
+    $GAME.end_day()

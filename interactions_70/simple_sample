@@ -1,0 +1,10 @@
+init 70 python:
+  # A simple example of an interaction attached to a toilet, designed to be triggered by runtime "thirstyness in some other label"
+  class BegLillyForWater(Interaction):
+    def is_runnable(self):
+      if(self.v['enabled']):
+        if ePLAYER.get_stat('thirst') >= DTHIRSTY:
+          return True
+      return False
+
+  BegLillyForWater('beg_lilly_for_water', 'cell_toilet', { 'enabled':False })

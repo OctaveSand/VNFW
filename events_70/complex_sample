@@ -1,0 +1,39 @@
+# This is a more complex example of what can be done with the event system.
+# Here we're defining an event which fires every time GAME.end_turn() is called.
+# The run() method for this event effects the player's _thirst_ stat, and possibly
+# warns her, if her thirst is approaching levels we have defined in init/global_cfg_0.rpy
+# Note that we use the global ePLAYER constant to interact with the player stats rather
+# Than a convienience function like "ding()" because events are initalized before those
+# wrappers exist in the runtime.
+
+
+init 70 python:
+  class Thirsty(Event):
+    #increase thirst every action, check for extreme thirst and warn the player
+
+    def is_runnable(self):
+      return self.v['enabled']
+
+    def run(self):
+      #increase thirst
+      ePLAYER.inc_stat("thirst",self.v['thirst_inc'])
+      print("EVENT: Thirst, increase by {} to {}".format(self.v['thirst_inc'], ePLAYER.get_stat('thirst')))
+      #add a motd message and jump to the thirsty label if the player is danger-zone
+      if(ePLAYER.get_stat("thirst") >= self.v['dyingofthirst']):
+        motd_replace('thirst','You are dying of thirst!')
+        print("EVENT: Thirst, motd dying message added")
+        renpy.jump("thirsty")
+      elif(ePLAYER.get_stat("thirst") >= self.v['reallythirsty']):
+        motd_replace('thirst','You are dangerously thirsty!')
+        print("EVENT: Thirst, motd extreme thirst message added")
+        renpy.jump("thirsty")
+      elif(ePLAYER.get_stat("thirst") >= self.v['thirsty']):
+        renpy.jump("thirsty")
+
+  #invocation: 
+  Thirsty('thirst','normal', days=['any'],v={'enabled':True,
+                                   'thirst_inc':renpy.random.randint(2, 5),
+                                   'thirsty':THIRSTY,
+                                   'reallythirsty':RTHIRSTY,
+                                   'dyingofthirst':DTHIRSTY,
+                                   'location':'any'}).schedule(GAME)

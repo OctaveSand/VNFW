@@ -1,0 +1,6 @@
+# Every entity has a default label, which is called when they have no playable interactions
+
+label lilly_home:
+  l "Hey, I'm kind of busy right now sorry."
+  l "I'll meet up with you later though!"
+  $GAME.home()
