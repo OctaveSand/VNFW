@@ -1,3 +1,0 @@
-label home:
-  #it is a bug to jump here
-  $GAME.home()
